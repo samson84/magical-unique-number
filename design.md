@@ -137,14 +137,14 @@ Based on: https://restfulapi.net/rest-api-design-tutorial-with-example/
 
 ## DB Scheme
 
-- ROUNDS table
+- ROUND table
   - id: int, primary key, auto increment
   - started_at: datetime in UTC
   - finished_at: datetime in UTC
-  - winner_vote_id: int, remote key -> ROUND
-- VOTES table
+  - winner_vote_id: int, foreign key -> ROUND
+- VOTE table
   - id: int, primary key, auto increment
-  - round_id: int, remote key -> ROUND
+  - round_id: int, foreign key -> ROUND
   - vote: int
-  - name: string (max 100)
+  - user: string (max 100)
   - 
