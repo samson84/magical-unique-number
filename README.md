@@ -24,17 +24,20 @@ Check the Makefile for available commands.
 
 - [x] create project skeleton
 - [ ] create Flask skeleton
-  - [ ] basic development runtime env
-  - [ ] routes and blueprints
-  - [ ] config
+  - [x] basic development runtime env
+  - [x] routes and blueprints
+  - [x] config
   - [ ] logging
   - [ ] error handling
   - [ ] input validation
+  - [ ] add integration tests
 - [ ] database: postgresql
-  - [ ] create a running database
-  - [ ] integrate the db access to Flask
-  - [ ] create a data access layer
+  - [x] create a running database
+  - [x] integrate the db access to Flask
+  - [x] create a data access layer
   - [x] develop a scheme
+  - [ ] create scheme sql
+  - [ ] create test data
 - [ ] REST API 
   - [x] design
   - [ ] `HTTP GET /rounds`: list rounds
