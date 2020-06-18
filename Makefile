@@ -10,7 +10,7 @@ create-requirements-txt:
 	poetry export -f requirements.txt
 
 run-dev-server:
-	poetry run python start-dev.py
+	poetry run bash -c 'export FLASK flask '
 
 run-tests:
 	poetry run pytest -v tests/
