@@ -115,10 +115,10 @@ Based on: https://restfulapi.net/rest-api-design-tutorial-with-example/
   - [x] returns: round document
   - [x] 200: OK
 - `HTTP POST or PUT /rounds/<id>/finish`: finish a given round
-  - returns: round document
-  - 200: OK
-  - 409: if the <id> does not exists
-  - 409: Conflict, if the round has already finished
+  - [x] returns: round document
+  - [x] 200: OK
+  - [x] 404: if the <id> does not exists
+  - [x] 409: Conflict, if the round has already finished
 - `HTTP POST /rounds/<id>/vote`: add a new vote to an active round
   - returns: empty
   - 200: OK

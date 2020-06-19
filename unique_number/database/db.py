@@ -30,8 +30,10 @@ class Database():
         return self.connection
 
     def query(self, query_string: str, params: Optional[Tuple[Any]]=None) -> Iterable[Tuple]:
-        with self.get_connection().cursor() as cursor:
+        connection = self.get_connection()
+        with connection.cursor() as cursor:
             cursor.execute(query_string, params)
+            connection.commit()
             for record in cursor:
                 yield record
         

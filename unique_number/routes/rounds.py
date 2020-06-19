@@ -38,3 +38,15 @@ def handle_start_round():
         raise errors.NotFound(what = 'Round')
     return create_success(result)
 
+@rounds_blueprint.route('/<int:round_id>/finish', methods=['POST'])
+def handle_finish_round(round_id):
+    current = rounds.get_one_round(round_id)
+    if current is None:
+        raise errors.NotFound(what = 'Round')
+    if current['finished_at'] is not None:
+        raise errors.RoundAlreadyFinished()
+    rounds.finish_round(round_id, datetime.utcnow())
+    result = rounds.get_one_round(round_id)
+    if result is None:
+        raise errors.NotFound(what = 'Round')
+    return create_success(result)

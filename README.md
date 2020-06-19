@@ -10,7 +10,7 @@ Check the Makefile for available commands.
 
 - [x] Single Global Playground
 - [x] Trusted players (no registration)
-- [ ] Explicit start of a round
+- [x] Explicit start of a round
 - [ ] Within an active round:
   - [ ] A user can add their number with a name as part of the game. The name is unique and cannot be reused in the round.
   - [ ] All users vote is collected.
@@ -41,8 +41,8 @@ Check the Makefile for available commands.
 - [ ] REST API 
   - [x] design
   - [x] `HTTP GET /rounds`: list rounds
-  - [ ] `HTTP POST /rounds`: create a new round
-  - [ ] `HTTP POST or PUT /rounds/<id>/finish`: finish a given round
+  - [x] `HTTP POST /rounds`: create a new round
+  - [x] `HTTP POST or PUT /rounds/<id>/finish`: finish a given round
   - [ ] `HTTP POST /rounds/<id>/vote`: add a new vote to an active round
   - [x] `HTTP GET /rounds/<id>`: get the one round document
   - [ ] `HTTP GET /rounds/<id>/stat`: get a stat document

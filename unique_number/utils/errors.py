@@ -15,3 +15,11 @@ class NotFound(ApplicationError):
             error_code = 'not_found',
             status_code=404
         )
+
+class RoundAlreadyFinished(ApplicationError):
+    def __init__(self):
+        super().__init__(
+            message = f'The round is already finished.',
+            error_code = 'already_finished',
+            status_code=409
+        )

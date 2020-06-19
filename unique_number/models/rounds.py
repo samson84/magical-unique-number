@@ -54,7 +54,7 @@ def get_all_rounds() -> Iterable[RoundListItem]:
         FROM {TABLE_NAME} r
         LEFT JOIN {votes.TABLE_NAME} v ON r.id = v.round_id
         GROUP BY v.round_id, r.id
-        ORDER BY r.started_at DESC
+        ORDER BY r.id DESC
         LIMIT %s;
     """
     results = get_db().query(QUERY, [LIMIT_OF_LISTING])
@@ -99,7 +99,7 @@ def get_recent_round() -> Union[RoundItem, None]:
         FROM {TABLE_NAME} r
         LEFT JOIN {votes.TABLE_NAME} v ON r.id = v.round_id
         GROUP BY v.round_id, r.id 
-        ORDER BY r.started_at DESC
+        ORDER BY r.id DESC
         LIMIT 1
         ;
     """
@@ -122,5 +122,10 @@ def create_round(started_at: datetime) -> int:
         RETURNING id'''
     result = get_db().query(QUERY, [started_at])
     return list(result)[0][0]
+
+def finish_round(round_id: int, finished_at: datetime) -> int:
+    QUERY = f"UPDATE {TABLE_NAME} SET finished_at=%s WHERE id=(%s) RETURNING id"
+    result = get_db().query(QUERY, (finished_at, round_id))
+    return list(result)
 
 
