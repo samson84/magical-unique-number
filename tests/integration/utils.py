@@ -11,6 +11,11 @@ import config
 
 from unique_number import create_app
 
+class MatchString():
+    def __eq__(self, other):
+        return isinstance(other, str)
+
+
 @contextmanager
 def app_test_context(test_data):
     db_name = generate_db_name('un_test')
@@ -37,7 +42,10 @@ def create_vote_queries(votes: List[Tuple]) -> str:
     queries = []
     for vote in votes:
         (id, round_id, vote, username) = vote
-        query = f"INSERT INTO votes (id,round_id,vote,username) VALUES ({id}, {round_id}, {vote}, '{username}');"
+        if id is None:
+            query = f"INSERT INTO votes (round_id,vote,username) VALUES ({round_id}, {vote}, '{username}');"
+        else:
+            query = f"INSERT INTO votes (id,round_id,vote,username) VALUES ({id}, {round_id}, {vote}, '{username}');"
         queries.append(query)
     return '\n'.join(queries)
 
@@ -46,7 +54,10 @@ def create_round_queries(rounds: List[Tuple]) -> str:
     for round in rounds:
         (id, started_at, finished_at) = round
         finished_at = f"'{finished_at}'" if finished_at is not None else 'NULL'
-        query = f"INSERT INTO rounds (id,started_at,finished_at) VALUES ({id}, '{started_at}', {finished_at});"
+        if id is None:
+            query = f"INSERT INTO rounds (started_at,finished_at) VALUES ('{started_at}', {finished_at});"
+        else:
+            query = f"INSERT INTO rounds (id,started_at,finished_at) VALUES ({id}, '{started_at}', {finished_at});"
         queries.append(query)
     return '\n'.join(queries)
 
