@@ -8,16 +8,16 @@ Check the Makefile for available commands.
 
 ## Requirements
 
-- [ ] Single Global Playground
-- [ ] Trusted players (no registration)
+- [x] Single Global Playground
+- [x] Trusted players (no registration)
 - [ ] Explicit start of a round
 - [ ] Within an active round:
   - [ ] A user can add their number with a name as part of the game. The name is unique and cannot be reused in the round.
   - [ ] All users vote is collected.
-- [ ] Compete the Round, return roundID
-- [ ] Round Results: winner, and the number
-- [ ] Listing all rounds with IDs and start date, end date, number of participants
-- [ ] Querying the results of any rounds including the most recent one: Winner and winning number
+- [x] Compete the Round, return roundID
+- [x] Round Results: winner, and the number
+- [x] Listing all rounds with IDs and start date, end date, number of participants
+- [x] Querying the results of any rounds including the most recent one: Winner and winning number
 - [ ] Querying the statistics of any round: distribution of votes from 1 to the max number voted for in that round.
 
 ## Tasks

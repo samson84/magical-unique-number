@@ -112,8 +112,8 @@ Based on: https://restfulapi.net/rest-api-design-tutorial-with-example/
   - [x] returns: round collection or empty list
   - [x] 200: OK
 - `HTTP POST /rounds`: create a new round
-  - returns: round document
-  - 201: Created
+  - [x] returns: round document
+  - [x] 200: OK
 - `HTTP POST or PUT /rounds/<id>/finish`: finish a given round
   - returns: round document
   - 200: OK
@@ -121,11 +121,15 @@ Based on: https://restfulapi.net/rest-api-design-tutorial-with-example/
   - 409: Conflict, if the round has already finished
 - `HTTP POST /rounds/<id>/vote`: add a new vote to an active round
   - returns: empty
-  - 201: Created
+  - 200: OK
   - 409: if the round has already finished
   - 409: if the user already voted
   - 404: if the round does not exists
 - `HTTP GET /rounds/<id>`: get the one round document
+  - [x] returns: a round document
+  - [x] 200: OK
+  - [x] 404: If the round does not exists
+- `HTTP GET /rounds/recent`: get the recent one
   - [x] returns: a round document
   - [x] 200: OK
   - [x] 404: If the round does not exists

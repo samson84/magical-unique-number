@@ -24,6 +24,7 @@ def handle_error(error: Exception) -> Response:
             error_code=error.error_code,
             status_code=error.status_code)
 
+    traceback.print_exc()
     return create_error(
         message='Something really went wrong.',
         error_code='internal_server_error',
