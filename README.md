@@ -28,23 +28,23 @@ Check the Makefile for available commands.
   - [x] routes and blueprints
   - [x] config
   - [ ] logging
-  - [ ] error handling
+  - [x] error handling
   - [ ] input validation
   - [ ] add integration tests
-- [ ] database: postgresql
+- [x] database: postgresql
   - [x] create a running database
   - [x] integrate the db access to Flask
   - [x] create a data access layer
   - [x] develop a scheme
-  - [ ] create scheme sql
-  - [ ] create test data
+  - [x] create scheme sql
+  - [x] create test data
 - [ ] REST API 
   - [x] design
-  - [ ] `HTTP GET /rounds`: list rounds
+  - [x] `HTTP GET /rounds`: list rounds
   - [ ] `HTTP POST /rounds`: create a new round
   - [ ] `HTTP POST or PUT /rounds/<id>/finish`: finish a given round
   - [ ] `HTTP POST /rounds/<id>/vote`: add a new vote to an active round
-  - [ ] `HTTP GET /rounds/<id>`: get the one round document
+  - [x] `HTTP GET /rounds/<id>`: get the one round document
   - [ ] `HTTP GET /rounds/<id>/stat`: get a stat document
 - [ ] static file serving
 - [ ] frontend

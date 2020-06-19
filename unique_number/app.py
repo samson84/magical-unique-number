@@ -1,22 +1,43 @@
 from typing import NamedTuple, Optional
 from os import environ
 
-from flask import Flask
+from flask import Flask, Response
+import logging 
+import traceback
 
-
-from unique_number.routes.rounds import rounds
+from unique_number.routes.rounds import rounds_blueprint
 from unique_number.database.db import connect_db
+from unique_number.utils.errors import ApplicationError
+from unique_number.utils.responses import create_error
+
+logger = logging.getLogger('app')
 
 class Config(NamedTuple):
     DB_PASSWORD: str
     DB_USER: str
     DB_NAME: str
 
+def handle_error(error: Exception) -> Response:
+    if isinstance(error, ApplicationError):
+        return create_error(
+            message=error.message,
+            error_code=error.error_code,
+            status_code=error.status_code)
+
+    return create_error(
+        message='Something really went wrong.',
+        error_code='internal_server_error',
+        status_code=500
+    )
 
 def create_app(test_config: Optional[Config] = None) -> Flask:
     app = Flask(__name__)
     app.url_map.strict_slashes = False
-    app.register_blueprint(rounds, url_prefix='/rounds')
+
+    app.register_error_handler(Exception, handle_error)
+
+    app.register_blueprint(rounds_blueprint, url_prefix='/rounds')
+
     if test_config is None:
         app.config.from_object(read_config_from_environment())
     else:

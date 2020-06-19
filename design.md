@@ -109,8 +109,8 @@ Based on: https://restfulapi.net/rest-api-design-tutorial-with-example/
 ### HTTP Methods
 
 - `HTTP GET /rounds`: list rounds
-  - returns: round collection
-  - 200: OK
+  - [x] returns: round collection or empty list
+  - [x] 200: OK
 - `HTTP POST /rounds`: create a new round
   - returns: round document
   - 201: Created
@@ -124,11 +124,11 @@ Based on: https://restfulapi.net/rest-api-design-tutorial-with-example/
   - 201: Created
   - 409: if the round has already finished
   - 409: if the user already voted
-  - 404: If the round does not exists
+  - 404: if the round does not exists
 - `HTTP GET /rounds/<id>`: get the one round document
-  - returns: a round document
-  - 200: OK
-  - 404: If the round does not exists
+  - [x] returns: a round document
+  - [x] 200: OK
+  - [x] 404: If the round does not exists
 - `HTTP GET /rounds/<id>/stat`: get a stat document
   - returns: a stat document
   - 200: OK

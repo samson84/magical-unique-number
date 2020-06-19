@@ -1,9 +1,4 @@
-CREATE TABLE rounds (
-    id SERIAL PRIMARY KEY,
-    started_at TIMESTAMPTZ,
-    finished_at TIMESTAMPTZ,
-    winner_vote_id INTEGER
-);
+DROP TABLE votes;
 CREATE TABLE votes (
     id SERIAL PRIMARY KEY,
     round_id INTEGER,
@@ -12,10 +7,14 @@ CREATE TABLE votes (
     UNIQUE(username, round_id)
 );
 
-ALTER TABLE rounds
-    ADD CONSTRAINT fk_winner_vote_id 
-        FOREIGN KEY (winner_vote_id) 
-        REFERENCES votes(id);
+
+DROP TABLE rounds;
+CREATE TABLE rounds (
+    id SERIAL PRIMARY KEY,
+    started_at TIMESTAMPTZ,
+    finished_at TIMESTAMPTZ
+);
+
 
 ALTER TABLE votes
     ADD CONSTRAINT fk_round_id
