@@ -12,7 +12,10 @@ def test_it_should_get_one_round():
         (2, '2020-08-11 13:30:39+00', '2020-08-12 13:30:39+00')
     ])
     input_votes = create_vote_queries([
-        (1, 1, 5, 'daniel')
+        (1, 1, 5, 'daniel'),
+        (2, 1, 4, 'john'),
+        (3, 1, 4, 'emily'),
+        (4, 1, 6, 'arthur'),
     ])
     input_data = input_rounds + input_votes
     expected = {
@@ -20,7 +23,7 @@ def test_it_should_get_one_round():
             'id': 1,
             'started_at': '2019-08-11T13:30:39+0000',
             'finished_at': '2019-08-12T13:30:39+0000',
-            'participants': 1,
+            'participants': 4,
             'winner_username': 'daniel',
             'winner_vote': 5,
             '_links': {
@@ -40,7 +43,10 @@ def test_it_should_get_one_round_unfinished():
         (2, '2020-08-11 13:30:39+00', '2020-08-12 13:30:39+00')
     ])
     input_votes = create_vote_queries([
-        (1, 1, 5, 'daniel')
+        (1, 1, 5, 'daniel'),
+        (2, 1, 4, 'john'),
+        (3, 1, 4, 'emily'),
+        (4, 1, 6, 'arthur'),
     ])
     input_data = input_rounds + input_votes
     expected = {
@@ -48,7 +54,7 @@ def test_it_should_get_one_round_unfinished():
             'id': 1,
             'started_at': '2019-08-11T13:30:39+0000',
             'finished_at': None,
-            'participants': 1,
+            'participants': 4,
             'winner_username': None,
             'winner_vote': None,
             '_links': {
