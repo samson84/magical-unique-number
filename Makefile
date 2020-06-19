@@ -13,4 +13,4 @@ run-dev-server:
 	poetry run python start-dev.py
 
 run-tests:
-	poetry run pytest -v tests/
+	poetry run pytest -vv tests/

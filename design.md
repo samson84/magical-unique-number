@@ -62,7 +62,7 @@ Based on: https://restfulapi.net/rest-api-design-tutorial-with-example/
     "started_at": "2020-06-18T15:22:02Z", // ISO8601 UTC
     "finished_at": "2020-06-18T15:22:02Z", //ISO8601 UTC
     "participants": 42,
-    "winner_name": "Ford",
+    "winner_username": "Ford",
     "winner_vote": 5,
     "_links": {
         "self": {"href": "/rounds/1234"},

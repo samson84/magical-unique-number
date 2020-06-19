@@ -1,4 +1,4 @@
-DROP TABLE votes;
+DROP TABLE IF EXISTS votes;
 CREATE TABLE votes (
     id SERIAL PRIMARY KEY,
     round_id INTEGER,
@@ -8,7 +8,7 @@ CREATE TABLE votes (
 );
 
 
-DROP TABLE rounds;
+DROP TABLE IF EXISTS rounds;
 CREATE TABLE rounds (
     id SERIAL PRIMARY KEY,
     started_at TIMESTAMPTZ,

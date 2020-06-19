@@ -6,16 +6,14 @@ import logging
 import traceback
 
 from unique_number.routes.rounds import rounds_blueprint
-from unique_number.database.db import connect_db
 from unique_number.utils.errors import ApplicationError
 from unique_number.utils.responses import create_error
+from unique_number.database.db import teardown_db
 
 logger = logging.getLogger('app')
 
 class Config(NamedTuple):
-    DB_PASSWORD: str
-    DB_USER: str
-    DB_NAME: str
+    DB_CONNECTION_STRING: str
 
 def handle_error(error: Exception) -> Response:
     if isinstance(error, ApplicationError):
@@ -44,16 +42,13 @@ def create_app(test_config: Optional[Config] = None) -> Flask:
     else:
         app.config.from_object(test_config)
 
-    connect_db(
-        db_name=app.config['DB_NAME'],
-        user = app.config['DB_USER'], 
-        password=app.config['DB_PASSWORD']
-    )
+    @app.teardown_appcontext
+    def handle_teardown(error):
+        teardown_db(error)
+
     return app
 
 def read_config_from_environment() -> Config:
     return Config(
-        DB_PASSWORD=environ.get('POSTGRES_PASSWORD'),
-        DB_USER=environ.get('POSTGRES_USER'),
-        DB_NAME=environ.get('POSTGRES_DB')
+        DB_CONNECTION_STRING=environ.get('DB_CONNECTION_STRING'),
     )

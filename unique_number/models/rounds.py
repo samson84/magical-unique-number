@@ -38,8 +38,8 @@ def create_round_item(
         "winner_username": winner.get('username'),
         "winner_vote": winner.get('vote'),
         "_links": {
-            "self": {"href": "/rounds/1234"},
-            "stat": {"href": "/rounds/1234/stat"},
+            "self": {"href": f"/rounds/{id}"},
+            "stat": {"href": f"/rounds/{id}/stat"},
         },
     }
 
