@@ -23,13 +23,13 @@ Check the Makefile for available commands.
 ## Tasks
 
 - [x] create project skeleton
-- [ ] create Flask skeleton
+- [x] create Flask skeleton
   - [x] basic development runtime env
   - [x] routes and blueprints
   - [x] config
   - [x] error handling
   - [x] input validation
-  - [ ] add integration tests
+  - [x] add integration tests
 - [x] database: postgresql
   - [x] create a running database
   - [x] integrate the db access to Flask

@@ -45,7 +45,7 @@ Based on: https://restfulapi.net/rest-api-design-tutorial-with-example/
         "id": 1235,
         "started_at": "2020-06-18T15:22:02Z", // ISO8601 UTC
         "finished_at": null, //ISO8601 UTC
-        "participants": null,
+        "participants": 5,
         "_links": {
             "self": {"href": "/rounds/1235"}
         },

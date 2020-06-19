@@ -45,7 +45,8 @@ def create_round_queries(rounds: List[Tuple]) -> str:
     queries = []
     for round in rounds:
         (id, started_at, finished_at) = round
-        query = f"INSERT INTO rounds (id,started_at,finished_at) VALUES ({id}, '{started_at}', '{finished_at}');"
+        finished_at = f"'{finished_at}'" if finished_at is not None else 'NULL'
+        query = f"INSERT INTO rounds (id,started_at,finished_at) VALUES ({id}, '{started_at}', {finished_at});"
         queries.append(query)
     return '\n'.join(queries)
 

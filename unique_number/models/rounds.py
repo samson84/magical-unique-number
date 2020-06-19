@@ -92,16 +92,22 @@ def get_one_round(id: int) -> Union[RoundItem, None]:
 def get_recent_round() -> Union[RoundItem, None]:
     QUERY = f"""
         SELECT 
-            r.id round_id, 
-            r.started_at started_at, 
-            r.finished_at finished_at,
-            COUNT(v.round_id) participants
-        FROM {TABLE_NAME} r
-        LEFT JOIN {votes.TABLE_NAME} v ON r.id = v.round_id
-        GROUP BY v.round_id, r.id 
-        ORDER BY r.id DESC
+            temp.round_id,
+            temp.started_at,
+            temp.finished_at,
+            temp.participants
+        FROM (
+            SELECT 
+                r.id round_id, 
+                r.started_at started_at, 
+                r.finished_at finished_at,
+                COUNT(v.round_id) participants
+            FROM {TABLE_NAME} r
+            LEFT JOIN {votes.TABLE_NAME} v ON r.id = v.round_id
+            GROUP BY v.round_id, r.id 
+            ORDER BY r.id DESC
+        ) temp
         LIMIT 1
-        ;
     """
     results = get_db().query(QUERY)
     return fill_round_item(results)
