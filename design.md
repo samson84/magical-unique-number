@@ -120,11 +120,13 @@ Based on: https://restfulapi.net/rest-api-design-tutorial-with-example/
   - [x] 404: if the <id> does not exists
   - [x] 409: Conflict, if the round has already finished
 - `HTTP POST /rounds/<id>/vote`: add a new vote to an active round
-  - returns: empty
-  - 200: OK
-  - 409: if the round has already finished
-  - 409: if the user already voted
-  - 404: if the round does not exists
+  - [x] returns: empty
+  - [x] 200: OK
+  - [x] 400: if the json is malformed
+  - [x] 409: if the vote is negative or too large
+  - [x] 409: if the round has already finished
+  - [x] 409: if the user already voted
+  - [x] 404: if the round does not exists
 - `HTTP GET /rounds/<id>`: get the one round document
   - [x] returns: a round document
   - [x] 200: OK
@@ -134,10 +136,10 @@ Based on: https://restfulapi.net/rest-api-design-tutorial-with-example/
   - [x] 200: OK
   - [x] 404: If the round does not exists
 - `HTTP GET /rounds/<id>/stat`: get a stat document
-  - returns: a stat document
-  - 200: OK
-  - 409: Conflict, If the round is ongoing.
-  - 404: If the round does not exists
+  - [x] returns: a stat document
+  - [x] 200: OK
+  - [x] 409: Conflict, If the round is ongoing.
+  - [x] 404: If the round does not exists
 
 ## DB Scheme
 
@@ -145,10 +147,8 @@ Based on: https://restfulapi.net/rest-api-design-tutorial-with-example/
   - id: int, primary key, auto increment
   - started_at: datetime in UTC
   - finished_at: datetime in UTC
-  - winner_vote_id: int, foreign key -> ROUND
 - VOTE table
   - id: int, primary key, auto increment
   - round_id: int, foreign key -> ROUND
   - vote: int
-  - user: string (max 100)
-  - 
+  - username: string (max 100)

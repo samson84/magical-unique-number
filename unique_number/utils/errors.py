@@ -23,3 +23,27 @@ class RoundAlreadyFinished(ApplicationError):
             error_code = 'already_finished',
             status_code=409
         )
+
+class ValidationError(ApplicationError):
+    def __init__(self, validation_error):
+        super().__init__(
+            message = f'Invalid input: {validation_error}',
+            status_code=400,
+            error_code='invalid_input'
+        )
+
+class InvalidVote(ApplicationError):
+    def __init__(self, message):
+        super().__init__(
+            message = f'Invalid vote: {message}',
+            status_code=409,
+            error_code='invalid_vote'
+        )
+
+class RoundStillActive(ApplicationError):
+    def __init__(self, message):
+        super().__init__(
+            message = f'The Round is s till active.',
+            status_code=409,
+            error_code='not_finished'
+        )

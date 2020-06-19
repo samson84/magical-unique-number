@@ -27,9 +27,8 @@ Check the Makefile for available commands.
   - [x] basic development runtime env
   - [x] routes and blueprints
   - [x] config
-  - [ ] logging
   - [x] error handling
-  - [ ] input validation
+  - [x] input validation
   - [ ] add integration tests
 - [x] database: postgresql
   - [x] create a running database
@@ -38,15 +37,15 @@ Check the Makefile for available commands.
   - [x] develop a scheme
   - [x] create scheme sql
   - [x] create test data
-- [ ] REST API 
+- [x] REST API 
   - [x] design
   - [x] `HTTP GET /rounds`: list rounds
   - [x] `HTTP POST /rounds`: create a new round
   - [x] `HTTP POST or PUT /rounds/<id>/finish`: finish a given round
-  - [ ] `HTTP POST /rounds/<id>/vote`: add a new vote to an active round
+  - [x] `HTTP POST /rounds/<id>/vote`: add a new vote to an active round
   - [x] `HTTP GET /rounds/<id>`: get the one round document
-  - [ ] `HTTP GET /rounds/<id>/stat`: get a stat document
+  - [x] `HTTP GET /rounds/<id>/stat`: get a stat document
 - [ ] static file serving
 - [ ] frontend
-- [ ] deployment production
+- [ ] deployment to production
 
