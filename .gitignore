@@ -134,3 +134,4 @@ dmypy.json
 # db extension
 
 localhost.session.sql
+requirements.txt

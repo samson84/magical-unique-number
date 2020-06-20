@@ -10,10 +10,12 @@ from unique_number.utils.errors import ApplicationError
 from unique_number.utils.responses import create_error
 from unique_number.database.db import teardown_db
 
-logger = logging.getLogger('app')
-
 class Config(NamedTuple):
-    DB_CONNECTION_STRING: str
+    DB_USER: str
+    DB_PASSWORD: str
+    DB_DB: str
+    DB_HOST: str
+    DB_PORT: str
 
 def handle_error(error: Exception) -> Response:
     if isinstance(error, ApplicationError):
@@ -38,9 +40,12 @@ def create_app(test_config: Optional[Config] = None) -> Flask:
     app.register_blueprint(rounds_blueprint, url_prefix='/rounds')
 
     if test_config is None:
+
         app.config.from_object(read_config_from_environment())
     else:
+        app.logger.warning('Test config applied!')
         app.config.from_object(test_config)
+    app.logger.error(f'Config: {str(app.config)}')
 
     @app.teardown_appcontext
     def handle_teardown(error):

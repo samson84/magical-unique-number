@@ -7,10 +7,10 @@ update-dependencies:
 	poetry update
 
 create-requirements-txt:
-	poetry export -f requirements.txt
+	poetry export --format requirements.txt --output requirements.txt
 
 run-dev-server:
-	poetry run python start-dev.py
+	poetry run python main.py
 
 run-tests:
 	poetry run pytest -vv tests/
