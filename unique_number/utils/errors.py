@@ -41,7 +41,7 @@ class InvalidVote(ApplicationError):
         )
 
 class RoundStillActive(ApplicationError):
-    def __init__(self, message):
+    def __init__(self):
         super().__init__(
             message = f'The Round is s till active.',
             status_code=409,
