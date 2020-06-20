@@ -1,5 +1,5 @@
 from typing import NamedTuple, Optional
-from os import environ
+from os import getenv
 
 from flask import Flask, Response
 import logging 
@@ -55,9 +55,8 @@ def create_app(test_config: Optional[Config] = None) -> Flask:
 
 def read_config_from_environment() -> Config:
     return Config(
-        DB_USER = environ['POSTGRES_USER'],
-        DB_PASSWORD = environ['POSTGRES_PASSWORD'],
-        DB_DB = environ['POSTGRES_DB'],
-        DB_HOST = environ['POSTGRES_HOST'],
-        DB_PORT = environ['POSTGRES_PORT']
-    )
+        DB_USER = getenv('POSTGRES_USER'),
+        DB_PASSWORD = getenv('POSTGRES_PASSWORD'),
+        DB_DB = getenv('POSTGRES_DB'),
+        DB_HOST = getenv('POSTGRES_HOST'),
+        DB_PORT = getenv('POSTGRES_PORT'))
