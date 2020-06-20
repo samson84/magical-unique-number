@@ -12,8 +12,15 @@ import config
 from unique_number import create_app
 
 class MatchString():
+    def __init__(self, matcher: Optional[str] = None):
+        self.matcher=matcher
     def __eq__(self, other):
-        return isinstance(other, str)
+        if not isinstance(other, str):
+            return False
+        if isinstance(self.matcher, str):
+            return self.matcher in other
+        return True
+
 
 
 @contextmanager
