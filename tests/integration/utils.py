@@ -10,6 +10,7 @@ from datetime import datetime
 import config
 
 from unique_number import create_app
+from unique_number.utils.db_helpers import get_postgres_dsn
 
 class MatchString():
     def __init__(self, matcher: Optional[str] = None):
@@ -26,7 +27,7 @@ class MatchString():
 @contextmanager
 def app_test_context(test_data):
     db_name = generate_db_name('un_test')
-    admin_dsn = get_dsn(
+    admin_dsn = get_postgres_dsn(
         password=config.TEST_DB_PASSWORD, 
         host=config.TEST_DB_HOST, 
         port=config.TEST_DB_PORT,         
@@ -35,13 +36,12 @@ def app_test_context(test_data):
     )
     with prepared_db(dsn=admin_dsn, password=config.TEST_DB_PASSWORD, db_name=db_name, query=test_data, init_script=config.INIT_SCRIPT, keep_db=config.KEEP_DB):
         class AppConfig():
-            DB_CONNECTION_STRING = get_dsn(
-                password=config.TEST_DB_PASSWORD, 
-                host=config.TEST_DB_HOST, 
-                port=config.TEST_DB_PORT,         
-                user=config.TEST_DB_USER,
-                db_name=db_name
-            )
+            DB_USER=config.TEST_DB_USER
+            DB_PASSWORD=config.TEST_DB_PASSWORD
+            DB_PORT=config.TEST_DB_PORT
+            DB_HOST=config.TEST_DB_HOST
+            DB_DB=db_name
+    
         with app_test_client(create_app, AppConfig) as client:
             yield client
 
@@ -67,15 +67,6 @@ def create_round_queries(rounds: List[Tuple]) -> str:
             query = f"INSERT INTO rounds (id,started_at,finished_at) VALUES ({id}, '{started_at}', {finished_at});"
         queries.append(query)
     return '\n'.join(queries)
-
-
-def get_dsn(
-        password: str, 
-        db_name: str, 
-        host: Optional[str] = 'localhost', 
-        port: Optional[int] = 5432,         
-        user: Optional[str] = 'postgres') -> str:
-    return f'postgresql://{user}:{password}@{host}:{port}/{db_name}'
 
 def generate_random_string(length: int) -> str:
     chars = string.ascii_lowercase + string.digits

@@ -50,5 +50,9 @@ def create_app(test_config: Optional[Config] = None) -> Flask:
 
 def read_config_from_environment() -> Config:
     return Config(
-        DB_CONNECTION_STRING=environ.get('DB_CONNECTION_STRING'),
+        DB_USER = environ['POSTGRES_USER'],
+        DB_PASSWORD = environ['POSTGRES_PASSWORD'],
+        DB_DB = environ['POSTGRES_DB'],
+        DB_HOST = environ['POSTGRES_HOST'],
+        DB_PORT = environ['POSTGRES_PORT']
     )

@@ -1,10 +1,19 @@
 from typing import Optional, List, Dict, Callable, Tuple, Any, Iterable
 from flask import g, current_app
 import psycopg2
-    
+
+from unique_number.utils.db_helpers import get_postgres_dsn
+
 def get_db():
     if 'db' not in g:
-        g.db = Database(current_app.config['DB_CONNECTION_STRING'])
+        connection_string = get_postgres_dsn(
+            password=current_app.config['DB_PASSWORD'],
+            host=current_app.config['DB_HOST'],
+            port=current_app.config['DB_PORT'],
+            user=current_app.config['DB_USER'],
+            db_name=current_app.config['DB_DB']
+        )
+        g.db = Database(connection_string)
     return g.db
 
 def teardown_db(error):

@@ -14,3 +14,9 @@ run-dev-server:
 
 run-tests:
 	poetry run pytest -vv tests/
+
+start-test-db:
+	docker-compose --file docker-compose.test.yml --env-file test.env up --detach
+
+stop-test-db:
+	docker-compose --file docker-compose.test.yml --env-file test.env down
