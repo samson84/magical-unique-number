@@ -31,6 +31,7 @@ all possible commands are available.
 2. Install the needed softwares in the prerequisites section.
 3. `make start-production` to start the application.
 4. Reach the app on `localhost:APP_EXTERNAL_PORT` (APP_EXTERNAL_PORT is set up in the `.env` file.) 
+5. Test the proper setup: `curl localhost:APP_EXTERNAL_PORT/rounds`. `{payload: []}` should be received.
 
 - Check the logs: `make production-logs`
 - Stop the application: 
@@ -79,7 +80,11 @@ To run the test
 
 `make run-tests`
 
-### Planninf and design
+### Using test data for development
+
+Some random test data found in `./sql/test_data.sql`. The `init.sql` must be executed first.
+
+### Planning and design
 
 The design decisions and a short REST API design document is 
 in the [design.md](design.md).
