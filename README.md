@@ -75,8 +75,18 @@ Two make targets optionally create a test server based on the `test.env` file.
 
 `make stop-dev-db`
 
+To run the test
 
-## Requirements
+`make run-tests`
+
+### Planninf and design
+
+The design decisions and a short REST API design document is 
+in the [design.md](design.md).
+
+## PM
+
+### Requirements
 
 - [x] Single Global Playground
 - [x] Trusted players (no registration)
@@ -90,7 +100,7 @@ Two make targets optionally create a test server based on the `test.env` file.
 - [x] Querying the results of any rounds including the most recent one: Winner and winning number
 - [x] Querying the statistics of any round: distribution of votes from 1 to the max number voted for in that round.
 
-## Tasks
+### Tasks
 
 - [x] create project skeleton
 - [x] create Flask skeleton
