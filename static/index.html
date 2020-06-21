@@ -1,0 +1,123 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <title>The Magical Unique Number Game</title>
+  <meta name="description" content="The Magical Unique Number Game">
+  <meta name="author" content="Daniel Hatas">
+  <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/base-min.css">
+  <link rel="stylesheet" href="https://cdn.rawgit.com/Chalarangelo/mini.css/v3.0.1/dist/mini-default.min.css">
+  <link rel="stylesheet" href="style.css?v=1.0">
+  <script type="module" src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>
+</head>
+
+<body>
+  <h1>The Magical Unique Number Game</h1>
+  <p>Find an ongoing round. Guess a positive number. Wait for closing the round.</p>
+  <p>The player with the least unique guess won.</p>
+  <div x-data="components.Rounds()" x-init="getAll">
+    <button class='primary' x-on:click="start">Start new round</button>
+    <button x-on:click="getAll">Refresh</button>
+    
+    <span class="toast" x-show="isLoading">Loading...</span>
+    <mark class="secondary tag" x-text="error" x-show="error"></mark>
+    
+    <div class=row>
+      <template x-for="round in rounds">
+        <div class="card">
+          <div class="section">
+            <h3 x-text="`Round #${round.id}`"></h3>
+            <p>
+              <strong>Started at </strong>
+              <span x-text="round.started_at"></span>
+            </p>
+            <p x-show="round.finished_at">
+              <strong>Finished at </strong>
+              <span x-text="round.finished_at"></span>
+            </p>
+            <div style="padding-left: 0.5em">
+              <mark class="primary tag" title="Participants"><span class="icon-user inverse"></span><span x-text="round.participants"></span></mark>
+              <mark class="primary tag" x-show="!round.finished_at"><span>Active</span></mark>
+              <mark class="tertiary tag" x-show="round.winner_username"><span x-text="`${round.winner_username} won with ${round.winner_vote}`"></span></mark>
+            </div>
+          </div>
+          <div class="section">
+            <span x-show="!round.finished_at">
+              <button class="primary" x-on:click="vote_round_id=round.id">
+                <label for="vote-modal-control">Vote!</label>
+              </button>
+              <input type="checkbox" id="vote-modal-control" class="modal">
+              <div>
+                <div class="card">
+                  <label for="vote-modal-control" class="modal-close"></label>
+                  <h3 class="section" x-text="`Vote for round #${vote_round_id}`"></h3>
+                  <div class="section">
+                    <p>
+                      Give your name and a positive number.
+                      You can vote only once.
+                    </p>
+                    <input 
+                      x-on:input="onUsernameChange"
+                      x-bind:value="username_input"
+                      type="text" 
+                      placeholder="Your name" 
+                      required
+                    />
+                    <input 
+                      x-on:input="onVoteChange"
+                      x-bind:value="vote_input"
+                      type="number"
+                      placeholder="Your vote"
+                      required
+                    />
+                    <button class="primary" x-on:click="vote(vote_round_id)">
+                      <label for="vote-modal-control">
+                        Submit
+                      </label>
+                    </button>
+                    
+                  </div>
+
+                </div>
+              </div>
+            </span>
+            <button 
+              class="secondary" 
+              x-show="!round.finished_at"
+              x-on:click=finish(round.id)
+            >
+              Finish
+            </button>
+            <button 
+              x-show="round.finished_at"
+              x-on:click=getDetails(round.id)
+            >
+              Details
+            </button>
+
+            <span x-show="round.finished_at">
+              <button >
+                <label for="stats-modal-control">Stats</label>
+              </button>
+              <input type="checkbox" id="stats-modal-control" class="modal">
+              <div class="card">
+                <label for="stats-modal-control" class="modal-close"></label>
+                <h3 class="section">Stats</h3>
+                <div class="section">
+                </div>
+              </div>
+            </span>
+
+            
+          </div>
+        </div>
+      </template>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+
+</html>
