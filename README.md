@@ -1,4 +1,4 @@
-# magical-unique-number
+# unique-number
 
 A simple guess the least unique positive integer number implementation.
 
@@ -26,7 +26,7 @@ Tested with the following versions:
 The full environment is managed by docker compose it will spin up a database and the service too.
 
 1. Check the `example.env` file, create an `.env` file based on that. (The database will be created with those values.)
-2. Install the needed packages in the prerequisites section.
+2. Install the needed components in the prerequisites section.
 3. `make start-production` to start the application.
 4. Reach the api on `localhost:APP_EXTERNAL_PORT` (APP_EXTERNAL_PORT is set up in the `.env` file.) 
 5. Open `localhost:APP_EXTERNAL_PORT/game` in your borwser for the game. (Only latest Firefox and Chrome is supported.)
@@ -37,8 +37,7 @@ The full environment is managed by docker compose it will spin up a database and
 
 ### Manage the project
 
-Check the Makefile for available commands. If make is not installed,
-all possible commands are documented in the file.
+Check the Makefile for available commands. Even if no Makefile is used, the general usage of the repo is documented there.
 
 ### Configuration and package management
 
