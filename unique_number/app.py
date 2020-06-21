@@ -32,7 +32,7 @@ def handle_error(error: Exception) -> Response:
     )
 
 def create_app(test_config: Optional[Config] = None) -> Flask:
-    app = Flask(__name__)
+    app = Flask(__name__, )
     app.url_map.strict_slashes = False
 
     app.register_error_handler(Exception, handle_error)
@@ -45,7 +45,7 @@ def create_app(test_config: Optional[Config] = None) -> Flask:
     else:
         app.logger.warning('Test config applied!')
         app.config.from_object(test_config)
-    app.logger.error(f'Config: {str(app.config)}')
+    app.logger.info(f'Config: {str(app.config)}')
 
     @app.teardown_appcontext
     def handle_teardown(error):
