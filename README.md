@@ -138,3 +138,7 @@ in the [design.md](design.md).
 - [x] frontend
 - [x] deployment to production
 
+## Purpose
+
+The project was made for an exercise for a job interview. On the other hand, I wanted to make a Flask boilerplate for future use and also wanted to practice the SQL queries and REST API design.
+
