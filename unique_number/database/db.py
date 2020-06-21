@@ -19,7 +19,7 @@ def get_db():
 def teardown_db(error):
     db = g.pop('db', None)
     if db is not None:
-        db.close_connection
+        db.close_connection()
 
 class Database():
     def __init__(self, connection_string: str):
