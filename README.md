@@ -6,7 +6,7 @@ A simple guess the least unique positive integer number implementation.
 
 ### Prerequisites
 
-The following components needed for the fluent working environment.
+The following components are needed for the fluent working environment.
 
 - install docker: https://docs.docker.com/get-docker/
 - install docker-compose: https://docs.docker.com/compose/install/
