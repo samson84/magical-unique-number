@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="https://cdn.rawgit.com/Chalarangelo/mini.css/v3.0.1/dist/mini-default.min.css">
   <link rel="stylesheet" href="style.css?v=1.0">
   <script type="module" src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
 </head>
 
 <body>
@@ -28,6 +29,7 @@
     <div class=row>
       <template x-for="round in rounds">
         <div class="card">
+
           <div class="section">
             <h3 x-text="`Round #${round.id}`"></h3>
             <p>
@@ -44,16 +46,17 @@
               <mark class="tertiary tag" x-show="round.winner_username"><span x-text="`${round.winner_username} won with ${round.winner_vote}`"></span></mark>
             </div>
           </div>
+
           <div class="section">
             <span x-show="!round.finished_at">
-              <button class="primary" x-on:click="vote_round_id=round.id">
-                <label for="vote-modal-control">Vote!</label>
+              <button class="primary" >
+                <label x-bind:for="`vote-modal-control-${round.id}`">Vote!</label>
               </button>
-              <input type="checkbox" id="vote-modal-control" class="modal">
+              <input type="checkbox" x-bind:id="`vote-modal-control-${round.id}`" class="modal">
               <div>
                 <div class="card">
-                  <label for="vote-modal-control" class="modal-close"></label>
-                  <h3 class="section" x-text="`Vote for round #${vote_round_id}`"></h3>
+                  <label x-bind:for="`vote-modal-control-${round.id}`" class="modal-close"></label>
+                  <h3 class="section" x-text="`Vote for round #${round.id}`"></h3>
                   <div class="section">
                     <p>
                       Give your name and a positive number.
@@ -73,12 +76,11 @@
                       placeholder="Your vote"
                       required
                     />
-                    <button class="primary" x-on:click="vote(vote_round_id)">
-                      <label for="vote-modal-control">
+                    <button class="primary" x-on:click="vote(round.id)">
+                      <label x-bind:for="`vote-modal-control-${round.id}`">
                         Submit
                       </label>
                     </button>
-                    
                   </div>
 
                 </div>
@@ -99,19 +101,18 @@
             </button>
 
             <span x-show="round.finished_at">
-              <button >
-                <label for="stats-modal-control">Stats</label>
+              <button x-on:click="getStat(round.id)">
+                <label x-bind:for="`stats-modal-control-${round.id}`">Stats</label>
               </button>
-              <input type="checkbox" id="stats-modal-control" class="modal">
-              <div class="card">
-                <label for="stats-modal-control" class="modal-close"></label>
-                <h3 class="section">Stats</h3>
-                <div class="section">
+              <input type="checkbox" x-bind:id="`stats-modal-control-${round.id}`" class="modal">
+              <div>
+                <div class="card fluid">
+                  <label x-bind:for="`stats-modal-control-${round.id}`" class="modal-close"></label>
+                  <h3 class="section" x-text="`Stats for Round #${round.id}`"></h3>
+                  <canvas x-bind:id="`chart-${round.id}`" width="400", height="400"></canvas>
                 </div>
               </div>
             </span>
-
-            
           </div>
         </div>
       </template>
