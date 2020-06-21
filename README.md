@@ -10,7 +10,7 @@ The following components needed for the fluent working environment.
 
 - install docker: https://docs.docker.com/get-docker/
 - install docker-compose: https://docs.docker.com/compose/install/
-- install poetry: https://python-poetry.org/docs/
+- install poetry (for development): https://python-poetry.org/docs/
 
 Tested with the following versions:
 
@@ -20,31 +20,32 @@ Tested with the following versions:
 - Docker Compose: 1.26.0, build d4451659
 - Linux/Mint/Ubuntu(18.04)
 
-### Manage the project
-
-Check the Makefile for available commands. If make is not installed,
-all possible commands are available.
-
 ### Start the application
 
 1. Check the `example.env` file, create an `.env` file based on that.
-2. Install the needed softwares in the prerequisites section.
+2. Install the needed packages in the prerequisites section.
 3. `make start-production` to start the application.
-4. Reach the app on `localhost:APP_EXTERNAL_PORT` (APP_EXTERNAL_PORT is set up in the `.env` file.) 
-5. Test the proper setup: `curl localhost:APP_EXTERNAL_PORT/rounds`. `{payload: []}` should be received.
+4. Reach the api on `localhost:APP_EXTERNAL_PORT` (APP_EXTERNAL_PORT is set up in the `.env` file.) 
+5. Open `localhost:APP_EXTERNAL_PORT/game` in your borwser for the game. (Only latest Firefox and Chrome is supported.)
+6. Test the proper setup: `curl localhost:APP_EXTERNAL_PORT/rounds`. `{payload: []}` should be received.
 
 - Check the logs: `make production-logs`
-- Stop the application: 
+- Stop the application: `make stop-production`
+
+### Manage the project
+
+Check the Makefile for available commands. If make is not installed,
+all possible commands are documented in the file.
 
 ### Configuration and package management
 
 `.env` file is used by the application "inside" and by the docker outside.
 
 The package management is poetry, so the `requirements.txt` is git ignored.
-The Dependencies are listed in the `pyproject.toml`, the deep dependency tree is freezed in `poetry.lock`. If a new dependency is added to the project, a lockfile should be updated with `make update-dependencies`.
+The dependencies are listed in the `pyproject.toml`, the deep dependency tree is freezed in `poetry.lock`. If a new dependency is added to the project, a lockfile should be updated with `make update-dependencies`.
 
-Hovewer when the app's container is built by docker, it uses the `requriements.txt`, so this can be generated from the `poetry.lock` with the `make create-requirements-txt`. It is called automatically in the makefile, when
-start-production targer is invoked in it.
+Hovewer when the app's container is built by docker, it uses the `requriements.txt`, it is generated from the `poetry.lock` with the `make create-requirements-txt`. This makefile target is called automatically when
+start-production targer is invoked.
 
 ### Database initalization
 
@@ -70,7 +71,7 @@ Test's environment variables are defined in the `test.env`.
 A running postgre instance is needed for the tests, and its settings 
 must match with the `test.env`.
 
-Two make targets optionally create a test server based on the `test.env` file.
+Two make targets optionally create the test server based on the `test.env` file.
 
 `make start-dev-db`
 
@@ -130,7 +131,7 @@ in the [design.md](design.md).
   - [x] `HTTP POST /rounds/<id>/vote`: add a new vote to an active round
   - [x] `HTTP GET /rounds/<id>`: get the one round document
   - [x] `HTTP GET /rounds/<id>/stat`: get a stat document
-- [ ] static file serving
-- [ ] frontend
+- [x] static file serving
+- [x] frontend
 - [x] deployment to production
 
