@@ -19,10 +19,13 @@ Tested with the following versions:
 - Docker: 19.03.11 build 42e35e61f3
 - Docker Compose: 1.26.0, build d4451659
 - Linux/Mint/Ubuntu(18.04)
+- Chrome: 83, Firefox: 77
 
 ### Start the application
 
-1. Check the `example.env` file, create an `.env` file based on that.
+The full environment is managed by docker compose it will spin up a database and the service too.
+
+1. Check the `example.env` file, create an `.env` file based on that. (The database will be created with those values.)
 2. Install the needed packages in the prerequisites section.
 3. `make start-production` to start the application.
 4. Reach the api on `localhost:APP_EXTERNAL_PORT` (APP_EXTERNAL_PORT is set up in the `.env` file.) 
