@@ -2,3 +2,4 @@
 !requirements.txt
 !main.py
 !uwsgi.ini
+!static

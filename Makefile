@@ -22,7 +22,7 @@ stop-test-db:
 	docker-compose --file docker-compose.test.yml --env-file test.env down
 
 start-production: create-requirements-txt
-	docker-compose --env-file .env up --detach
+	docker-compose --env-file .env up --detach --build
 
 stop-production:
 	docker-compose down
